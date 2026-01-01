@@ -1,0 +1,2800 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>English 7 Global Success - Unit 7: TRAFFIC (Offline Game)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --brand:#f59e0b;
+      --brand2:#10b981;
+      --danger:#ef4444;
+      --shadow: 0 14px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(245,158,11,.18), transparent 55%),
+                  radial-gradient(900px 600px at 90% 20%, rgba(16,185,129,.16), transparent 55%),
+                  var(--bg);
+      color:var(--ink);
+    }
+    a{color:inherit}
+    .app{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      padding: 18px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    @media (max-width: 980px){
+      .app{grid-template-columns: 1fr}
+      .sidebar{position:relative; top:auto}
+    }
+    .sidebar{
+      position: sticky;
+      top: 14px;
+      align-self:start;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .side-head{
+      padding: 16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(245,158,11,.22), transparent 60%),
+        radial-gradient(800px 500px at 90% 10%, rgba(16,185,129,.18), transparent 60%),
+        #fff;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(245,158,11,.12);
+      border:1px solid rgba(245,158,11,.25);
+      color:#92400e;
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size: 12px;
+    }
+    .h1{
+      margin:10px 0 6px;
+      font-size: 18px;
+      line-height:1.25;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.35;
+    }
+
+    .side-body{padding: 12px 12px 14px}
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top: 10px;
+    }
+    .nav button{
+      width:100%;
+      text-align:left;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: #fff;
+      cursor:pointer;
+      transition: transform .08s ease, border-color .12s ease, box-shadow .12s ease;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .nav button:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.06);
+    }
+    .nav button[aria-current="true"]{
+      border-color: rgba(245,158,11,.55);
+      box-shadow: 0 14px 26px rgba(245,158,11,.12);
+      background: linear-gradient(180deg, rgba(245,158,11,.12), rgba(255,255,255,1));
+    }
+    .nav .left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width: 0;
+    }
+    .nav .t{
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .nav .m{
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .pill{
+      flex:0 0 auto;
+      font-size:11px;
+      font-weight:800;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(17,24,39,.04);
+      color: var(--muted);
+    }
+
+    .tools{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top:1px dashed var(--line);
+      display:grid;
+      gap:10px;
+    }
+    .toolRow{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight:800;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 12px 20px rgba(17,24,39,.14);
+      transition: transform .08s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.secondary{
+      background: #fff;
+      color: var(--ink);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+    .btn.danger{
+      background: var(--danger);
+      box-shadow: 0 12px 20px rgba(239,68,68,.18);
+    }
+    .mini{
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
+    .range{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:#fff;
+      width: 100%;
+    }
+    .range label{
+      font-size: 12px;
+      font-weight:800;
+      color: var(--muted);
+      min-width: 72px;
+    }
+    input[type="range"]{width:100%}
+
+    .main{
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      min-height: 72vh;
+    }
+    .main-head{
+      padding: 18px 18px 12px;
+      border-bottom:1px solid var(--line);
+      background:
+        radial-gradient(1200px 520px at 0% 0%, rgba(245,158,11,.16), transparent 55%),
+        radial-gradient(1200px 520px at 100% 0%, rgba(16,185,129,.14), transparent 55%),
+        #fff;
+    }
+    .title{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+    .desc{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+      max-width: 78ch;
+    }
+    .progressWrap{
+      margin-top: 12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .bar{
+      flex: 1 1 320px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(17,24,39,.06);
+      border:1px solid var(--line);
+      overflow:hidden;
+      position: relative;
+    }
+    .bar > span{
+      display:block;
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+    }
+    .kpi{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .k{
+      padding: 8px 10px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .k b{color:var(--ink)}
+    .main-body{
+      padding: 16px 18px 20px;
+      display:grid;
+      gap:14px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 10px 20px rgba(0,0,0,.05);
+      overflow:hidden;
+    }
+    .card-h{
+      padding: 12px 14px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+      background: linear-gradient(180deg, rgba(17,24,39,.02), rgba(255,255,255,1));
+    }
+    .card-h .h{
+      margin:0;
+      font-size: 14px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .card-h .s{
+      margin:4px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.45;
+    }
+    .card-c{
+      padding: 12px 14px 14px;
+      display:grid;
+      gap:12px;
+    }
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .two{grid-template-columns: 1fr}
+    }
+
+    .q{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(17,24,39,.02);
+    }
+    .q .qt{
+      margin:0 0 6px;
+      font-weight:900;
+      font-size: 13px;
+      letter-spacing:.1px;
+    }
+    .q .qv{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.45;
+    }
+    .opts{
+      display:grid;
+      gap:8px;
+      margin-top: 6px;
+    }
+    .opt{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt input{margin-top: 2px}
+    .fill{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .fill input[type="text"], .fill textarea, .fill select{
+      width: min(520px, 100%);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-family: var(--sans);
+      font-size: 14px;
+      outline:none;
+    }
+    .fill textarea{min-height: 74px; resize: vertical}
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.45;
+    }
+
+    .grid{
+      display:grid;
+      gap:10px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap:10px;
+      align-items:center;
+      padding: 10px;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+    }
+    @media (max-width: 720px){
+      .row{grid-template-columns: 1fr}
+    }
+    .row .a{
+      font-weight:900;
+      font-size: 13px;
+    }
+    .row .b{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(17,24,39,.03);
+    }
+
+    .status{
+      margin-top: 10px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background:#fff;
+      padding: 12px;
+    }
+    .status.good{border-color: rgba(16,185,129,.45); background: rgba(16,185,129,.06)}
+    .status.bad{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.05)}
+    .status .st{
+      margin:0 0 4px;
+      font-weight:900;
+      font-size: 13px;
+    }
+    .status .sd{
+      margin:0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.45;
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      padding: 10px 12px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:900;
+      font-size: 13px;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    details summary::-webkit-details-marker{display:none}
+    details .dcontent{
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .split{grid-template-columns: 1fr}
+    }
+    .panel{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      padding: 12px;
+    }
+    .panel h4{
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .panel p{margin:0; color: var(--muted); font-size: 12px; line-height:1.55}
+    .conv{
+      display:grid;
+      gap:8px;
+      margin-top: 10px;
+    }
+    .line{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background:#fff;
+      padding: 10px 10px;
+    }
+    .line .en{font-weight:900; font-size: 12.8px}
+    .line .vn{margin-top: 6px; color: var(--muted); font-size: 12px; line-height:1.45}
+
+    .icons{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 820px){
+      .icons{grid-template-columns: repeat(2, minmax(0,1fr))}
+    }
+    .pic{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      padding: 10px;
+      display:grid;
+      gap:10px;
+      align-items:center;
+      justify-items:center;
+      text-align:center;
+    }
+    .pic .lab{
+      font-weight:900;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pic svg{width: 56px; height:56px}
+    .signs{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 820px){
+      .signs{grid-template-columns: repeat(2, minmax(0,1fr))}
+    }
+
+    .footerActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+      padding: 12px 14px;
+      border-top: 1px solid var(--line);
+      background: rgba(17,24,39,.02);
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 16px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 16px 28px rgba(0,0,0,.12);
+      font-size: 12px;
+      color: var(--muted);
+      display:none;
+      z-index: 30;
+      max-width: min(760px, calc(100vw - 24px));
+    }
+    .toast.show{display:block}
+    .mono{font-family: var(--mono)}
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Điều hướng Unit 7">
+      <div class="side-head">
+        <span class="badge">
+          <span style="display:inline-grid;place-items:center;width:22px;height:22px;border-radius:999px;background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.35);font-weight:900;">7</span>
+          TRAFFIC — Game offline (1 file)
+        </span>
+        <h2 class="h1">English 7 Global Success — Unit 7</h2>
+        <p class="sub">
+          Có nhạc nền (WebAudio), lưu tiến độ, chấm điểm, hiển thị đáp án + giải thích + dịch Việt theo từng câu/đoạn.
+        </p>
+
+        <div class="tools">
+          <div class="toolRow">
+            <button class="btn mini" id="btnSubmitAll">Nộp bài (Toàn bộ)</button>
+            <button class="btn secondary mini" id="btnReview">Xem kết quả</button>
+            <button class="btn secondary mini" id="btnReset">Làm lại</button>
+          </div>
+          <div class="toolRow">
+            <button class="btn secondary mini" id="btnMusic">Nhạc: Tắt</button>
+            <div class="range" title="Âm lượng">
+              <label for="vol">Âm lượng</label>
+              <input id="vol" type="range" min="0" max="100" value="35" />
+            </div>
+          </div>
+          <p class="sub" style="margin-top:6px">
+            Gợi ý: do trình duyệt chặn autoplay, hãy bấm “Nhạc” ít nhất 1 lần để bật âm.
+          </p>
+        </div>
+      </div>
+
+      <div class="side-body">
+        <div class="nav" id="nav"></div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
+          <p class="sub">
+            <b>Quy ước chấm điểm:</b> các bài trắc nghiệm/điền từ/nối/nhãn biển báo được chấm tự động.
+            Các bài viết câu vẫn chấm tự động theo tiêu chí “từ khóa + should/shouldn’t” (linh hoạt), đồng thời có đáp án mẫu để đối chiếu.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main" role="main">
+      <div class="main-head">
+        <h1 class="title" id="mainTitle">—</h1>
+        <p class="desc" id="mainDesc">—</p>
+
+        <div class="progressWrap">
+          <div class="bar" aria-label="Tiến độ làm bài"><span id="bar"></span></div>
+          <div class="kpi">
+            <div class="k"><b id="kAnswered">0</b> / <span id="kTotal">0</span> câu đã trả lời</div>
+            <div class="k">Điểm: <b id="kScore">0</b> / <span id="kMax">0</span></div>
+            <div class="k">Thời gian: <b id="kTime">00:00</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-body" id="content"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  // =========================
+  // Data (đúng nội dung theo ảnh)
+  // =========================
+  const DATA = [
+    {
+      id: "getting-started",
+      navTitle: "Getting Started",
+      navMeta: "Meeting in the schoolyard + Ex 2–5",
+      title: "GETTING STARTED — Meeting in the schoolyard",
+      desc: "Hội thoại + bài tập đọc lại hội thoại (trắc nghiệm), điền 1 từ, từ vựng phương tiện, hoạt động ‘Find someone who…’.",
+      blocks: [
+        {
+          type: "conversation",
+          title: "1) Listen and read — Conversation",
+          subtitle: "Hiển thị song ngữ (EN/VN) theo từng lượt lời.",
+          lines: [
+            { en: "Lan: Hi, Mark. How are you?", vn: "Lan: Chào Mark. Bạn khỏe không?" },
+            { en: "Mark: Good, thanks. And you? What did you do last Sunday?", vn: "Mark: Mình khỏe, cảm ơn. Còn bạn? Chủ nhật tuần trước bạn làm gì?" },
+            { en: "Lan: I'm fine. Last Sunday afternoon, I cycled round the lake near my home.", vn: "Lan: Mình cũng khỏe. Chiều Chủ nhật tuần trước, mình đạp xe vòng quanh cái hồ gần nhà." },
+            { en: "Mark: That sounds really healthy. By the way, do you often cycle to school too?", vn: "Mark: Nghe thật tốt cho sức khỏe. À mà, bạn cũng thường đạp xe đến trường chứ?" },
+            { en: "Lan: Yes, but sometimes my mum takes me on her motorbike.", vn: "Lan: Có, nhưng đôi khi mẹ chở mình bằng xe máy." },
+            { en: "Mark: How far is it from your home to school?", vn: "Mark: Từ nhà bạn đến trường xa bao nhiêu?" },
+            { en: "Lan: It's about two kilometres.", vn: "Lan: Khoảng 2 ki-lô-mét." },
+            { en: "Mark: How long does it take you to cycle there?", vn: "Mark: Bạn đạp xe đến đó mất bao lâu?" },
+            { en: "Lan: About 10 minutes. Sometimes, when there are traffic jams, it takes longer.", vn: "Lan: Khoảng 10 phút. Đôi khi có kẹt xe thì lâu hơn." },
+            { en: "Mark: You should be careful, especially when you cross the road.", vn: "Mark: Bạn nên cẩn thận, nhất là khi băng qua đường." },
+            { en: "Lan: Right. The roads get really crowded.", vn: "Lan: Đúng vậy. Đường xá đông lắm." },
+            { en: "Mark: Hey, how about going cycling round the lake this Sunday?", vn: "Mark: Này, Chủ nhật này đi đạp xe vòng quanh hồ nhé?" },
+            { en: "Lan: Great! Can you come to my house at 3 p.m.?", vn: "Lan: Tuyệt! Bạn có thể đến nhà mình lúc 3 giờ chiều không?" },
+            { en: "Mark: OK, Lan. See you then.", vn: "Mark: Được, Lan. Hẹn gặp nhé." }
+          ]
+        },
+
+        {
+          type: "quiz",
+          title: "2) Read the conversation again and choose the correct answer.",
+          subtitle: "Trắc nghiệm (MCQ). Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id: "GS2_1",
+              type: "mcq",
+              points: 1,
+              prompt: "How does Lan often go to school?",
+              vn: "Lan thường đến trường bằng cách nào?",
+              options: [
+                { key:"A", text:"By bicycle." , vn:"Bằng xe đạp."},
+                { key:"B", text:"By motorbike.", vn:"Bằng xe máy."},
+                { key:"C", text:"On foot.", vn:"Đi bộ."}
+              ],
+              answer: "A",
+              explain_en: "Lan says she often cycles to school (but sometimes her mum takes her on a motorbike).",
+              explain_vn: "Lan nói bạn ấy thường đạp xe đến trường (nhưng đôi khi mẹ chở bằng xe máy)."
+            },
+            {
+              id: "GS2_2",
+              type: "mcq",
+              points: 1,
+              prompt: "It normally takes Lan ______ to get to school.",
+              vn: "Thông thường Lan mất ______ để đến trường.",
+              options: [
+                { key:"A", text:"two minutes", vn:"2 phút"},
+                { key:"B", text:"ten minutes", vn:"10 phút"},
+                { key:"C", text:"twenty minutes", vn:"20 phút"}
+              ],
+              answer: "B",
+              explain_en: "Lan: “About 10 minutes.”",
+              explain_vn: "Lan: “Khoảng 10 phút.”"
+            },
+            {
+              id: "GS2_3",
+              type: "mcq",
+              points: 1,
+              prompt: "Lan and Mark agree to go cycling ______.",
+              vn: "Lan và Mark thống nhất đi đạp xe ______.",
+              options: [
+                { key:"A", text:"tomorrow", vn:"ngày mai"},
+                { key:"B", text:"every day", vn:"mỗi ngày"},
+                { key:"C", text:"at the weekend", vn:"vào cuối tuần"}
+              ],
+              answer: "C",
+              explain_en: "They agree to go cycling this Sunday, which is at the weekend.",
+              explain_vn: "Họ hẹn đi đạp xe vào Chủ nhật, tức là vào cuối tuần."
+            }
+          ]
+        },
+
+        {
+          type: "quiz",
+          title: "3) Write one word from the conversation to complete each sentence.",
+          subtitle: "Điền 1 từ (từ hội thoại). Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id:"GS3_1",
+              type:"fill",
+              points:1,
+              prompt:"Last Sunday afternoon, Lan ______ round the lake near her home.",
+              vn:"Chiều Chủ nhật tuần trước, Lan ______ vòng quanh cái hồ gần nhà.",
+              answers:["cycled"],
+              explain_en:"In the conversation: “I cycled round the lake near my home.”",
+              explain_vn:"Trong hội thoại: “I cycled round the lake near my home.” (Mình đạp xe vòng quanh hồ gần nhà.)"
+            },
+            {
+              id:"GS3_2",
+              type:"fill",
+              points:1,
+              prompt:'Mark says to Lan: "You ______ be careful, especially when you cross the road."',
+              vn:'Mark nói với Lan: "You ______ be careful, especially when you cross the road." (Bạn ______ cẩn thận...)',
+              answers:["should"],
+              explain_en:"The modal verb for advice is “should”.",
+              explain_vn:"Động từ khiếm khuyết dùng để khuyên là “should” (nên)."
+            }
+          ]
+        },
+
+        {
+          type: "matrix",
+          title: "4) Look at the pictures and write a word under each.",
+          subtitle: "Từ vựng phương tiện giao thông. Mỗi hình 1 điểm (chấp nhận nhiều biến thể hợp lệ).",
+          idPrefix: "GS4_",
+          items: [
+            { n:1, icon:"bicycle", prompt:"(1) ______", vn:"(1) ______", answers:["bicycle","bike"], explain_en:"This is a bicycle (bike).", explain_vn:"Đây là xe đạp." },
+            { n:2, icon:"car",     prompt:"(2) ______", vn:"(2) ______", answers:["car"], explain_en:"This is a car.", explain_vn:"Đây là ô tô." },
+            { n:3, icon:"bus",     prompt:"(3) ______", vn:"(3) ______", answers:["bus"], explain_en:"This is a bus.", explain_vn:"Đây là xe buýt." },
+            { n:4, icon:"motorbike",prompt:"(4) ______", vn:"(4) ______", answers:["motorbike","motorcycle"], explain_en:"This is a motorbike / motorcycle.", explain_vn:"Đây là xe máy." },
+            { n:5, icon:"plane",   prompt:"(5) ______", vn:"(5) ______", answers:["plane","airplane"], explain_en:"This is a plane (airplane).", explain_vn:"Đây là máy bay." },
+            { n:6, icon:"train",   prompt:"(6) ______", vn:"(6) ______", answers:["train"], explain_en:"This is a train.", explain_vn:"Đây là tàu hỏa." },
+            { n:7, icon:"boat",    prompt:"(7) ______", vn:"(7) ______", answers:["boat"], explain_en:"This is a boat.", explain_vn:"Đây là thuyền." },
+            { n:8, icon:"ship",    prompt:"(8) ______", vn:"(8) ______", answers:["ship"], explain_en:"This is a ship.", explain_vn:"Đây là tàu (tàu lớn/du thuyền)." }
+          ]
+        },
+
+        {
+          type: "practice",
+          title: "5) GAME — Find someone who… (hoạt động nói/khảo sát)",
+          subtitle: "Bài này là hoạt động lớp: điền tên bạn học. Không chấm tự động, nhưng có nút lưu.",
+          list: [
+            "usually walks to school",
+            "never goes to school by bus",
+            "cycles for exercise every day",
+            "never travels by plane",
+            "sometimes goes to school in a car"
+          ],
+          vnList: [
+            "thường đi bộ đến trường",
+            "không bao giờ đến trường bằng xe buýt",
+            "đạp xe để tập thể dục mỗi ngày",
+            "không bao giờ đi máy bay",
+            "đôi khi đến trường bằng ô tô"
+          ],
+          example: {
+            enA: "A: Do you usually walk to school?",
+            enB: "B: Yes, I do. / No, I don't.",
+            vnA: "A: Bạn có thường đi bộ đến trường không?",
+            vnB: "B: Có. / Không."
+          }
+        }
+      ]
+    },
+
+    {
+      id: "closer-look-1",
+      navTitle: "A Closer Look 1",
+      navMeta: "Vocabulary + Road signs",
+      title: "A CLOSER LOOK 1 — Vocabulary",
+      desc: "Nối động từ với cụm từ (ride/drive/sail/go/travel) và nhận diện biển báo giao thông.",
+      blocks: [
+        {
+          type:"match",
+          title:"1) Match the words in A with the phrases in B.",
+          subtitle:"Nối (mỗi dòng 1 điểm). Ví dụ trong SGK: 1. c (ride a bike).",
+          A: [
+            { key:"1", text:"ride", vn:"ride (đi/đạp)" },
+            { key:"2", text:"drive", vn:"drive (lái)" },
+            { key:"3", text:"sail", vn:"sail (đi thuyền)" },
+            { key:"4", text:"go", vn:"go (đi)" },
+            { key:"5", text:"travel", vn:"travel (du lịch/di chuyển)" }
+          ],
+          B: [
+            { key:"a", text:"a car", vn:"một chiếc ô tô" },
+            { key:"b", text:"a boat", vn:"một chiếc thuyền" },
+            { key:"c", text:"a bike", vn:"một chiếc xe đạp" },
+            { key:"d", text:"by air", vn:"bằng đường hàng không" },
+            { key:"e", text:"on foot", vn:"đi bộ" }
+          ],
+          answers: { "1":"c", "2":"a", "3":"b", "4":"e", "5":"d" },
+          explain_en: "Common collocations: ride a bike, drive a car, sail a boat, go on foot, travel by air.",
+          explain_vn: "Cụm từ thông dụng: ride a bike (đạp xe), drive a car (lái ô tô), sail a boat (đi thuyền), go on foot (đi bộ), travel by air (đi bằng máy bay)."
+        },
+
+        {
+          type:"signs",
+          title:"2) Look at the road signs. Then write the correct phrases under the signs.",
+          subtitle:"Nhận diện biển báo (mỗi biển 1 điểm).",
+          bank: [
+            { key:"no_right_turn", en:"No right turn", vn:"Cấm rẽ phải" },
+            { key:"cycle_lane", en:"Cycle lane", vn:"Làn đường cho xe đạp" },
+            { key:"school_ahead", en:"School ahead", vn:"Phía trước có trường học" },
+            { key:"traffic_lights", en:"Traffic lights", vn:"Đèn giao thông" },
+            { key:"no_cycling", en:"No cycling", vn:"Cấm xe đạp" },
+            { key:"hospital_ahead", en:"Hospital ahead", vn:"Phía trước có bệnh viện" }
+          ],
+          signs: [
+            { n:1, icon:"traffic_lights", answer:"traffic_lights" },
+            { n:2, icon:"hospital_ahead", answer:"hospital_ahead" },
+            { n:3, icon:"no_right_turn", answer:"no_right_turn" },
+            { n:4, icon:"cycle_lane", answer:"cycle_lane" },
+            { n:5, icon:"school_ahead", answer:"school_ahead" },
+            { n:6, icon:"no_cycling", answer:"no_cycling" }
+          ],
+          explain_en: "Match each sign to its meaning (traffic lights / hospital ahead / no right turn / cycle lane / school ahead / no cycling).",
+          explain_vn: "Ghép đúng biển báo với ý nghĩa (đèn giao thông / bệnh viện phía trước / cấm rẽ phải / làn xe đạp / trường học phía trước / cấm xe đạp)."
+        }
+      ]
+    },
+
+    {
+      id: "closer-look-2",
+      navTitle: "A Closer Look 2",
+      navMeta: "It (distance) + should/shouldn’t",
+      title: "A CLOSER LOOK 2 — Grammar",
+      desc: "Cấu trúc It chỉ khoảng cách + should/shouldn’t. Có bài viết câu, chọn đáp án, hoàn thành câu và viết câu theo tranh.",
+      blocks: [
+        {
+          type:"itDistance",
+          title:"1) Write sentences with It. Use these cues.",
+          subtitle:"Nhập câu hoàn chỉnh. Chấm tự động (linh hoạt: It is/It’s; about; metres/km). Mỗi câu 1 điểm.",
+          items: [
+            {
+              id:"CL2_IT_1",
+              cue:"700 metres / my flat / Youth Club.",
+              vnCue:"700 mét / căn hộ của tôi / Câu lạc bộ Thanh niên.",
+              accept: [
+                "it is about 700 metres from my flat to the youth club",
+                "it's about 700 metres from my flat to the youth club",
+                "it is 700 metres from my flat to the youth club",
+                "it's 700 metres from my flat to the youth club"
+              ],
+              explain_en:"Use: It is (about) + distance + from A to B.",
+              explain_vn:"Dùng: It is (about) + khoảng cách + from A to B. (Quãng đường từ A đến B là ...)"
+            },
+            {
+              id:"CL2_IT_2",
+              cue:"5 kilometres (km) / my village / nearest town.",
+              vnCue:"5 ki-lô-mét / làng tôi / thị trấn gần nhất.",
+              accept: [
+                "it is about 5 kilometres from my village to the nearest town",
+                "it's about 5 kilometres from my village to the nearest town",
+                "it is 5 kilometres from my village to the nearest town",
+                "it's 5 kilometres from my village to the nearest town",
+                "it is about 5 km from my village to the nearest town",
+                "it's about 5 km from my village to the nearest town",
+                "it is 5 km from my village to the nearest town",
+                "it's 5 km from my village to the nearest town"
+              ],
+              explain_en:"‘kilometres’ can be written as ‘km’.",
+              explain_vn:"‘kilometres’ có thể viết tắt là ‘km’."
+            },
+            {
+              id:"CL2_IT_3",
+              cue:"about 120 km / Ho Chi Minh City / Vung Tau.",
+              vnCue:"khoảng 120 km / TP. Hồ Chí Minh / Vũng Tàu.",
+              accept: [
+                "it is about 120 km from ho chi minh city to vung tau",
+                "it's about 120 km from ho chi minh city to vung tau",
+                "it is about 120 kilometres from ho chi minh city to vung tau",
+                "it's about 120 kilometres from ho chi minh city to vung tau"
+              ],
+              explain_en:"Place names stay the same; keep ‘from … to …’.",
+              explain_vn:"Tên địa danh giữ nguyên; dùng ‘from … to …’."
+            },
+            {
+              id:"CL2_IT_4",
+              cue:"384,400 km / the Earth / the Moon.",
+              vnCue:"384.400 km / Trái Đất / Mặt Trăng.",
+              accept: [
+                "it is 384400 km from the earth to the moon",
+                "it's 384400 km from the earth to the moon",
+                "it is 384,400 km from the earth to the moon",
+                "it's 384,400 km from the earth to the moon",
+                "it is 384400 kilometres from the earth to the moon",
+                "it is 384,400 kilometres from the earth to the moon"
+              ],
+              explain_en:"Large numbers may include commas; both forms are acceptable.",
+              explain_vn:"Số lớn có thể có dấu phẩy; cả hai cách đều chấp nhận."
+            },
+            {
+              id:"CL2_IT_5",
+              cue:"not very far / Ha Noi centre / Noi Bai Airport.",
+              vnCue:"không quá xa / trung tâm Hà Nội / sân bay Nội Bài.",
+              accept: [
+                "it is not very far from ha noi centre to noi bai airport",
+                "it's not very far from ha noi centre to noi bai airport"
+              ],
+              explain_en:"For ‘not very far’, keep the same pattern.",
+              explain_vn:"Với ‘not very far’, vẫn dùng cùng cấu trúc."
+            }
+          ],
+          tip_en:"Example: It is about 300 metres from my house to the bus stop.",
+          tip_vn:"Ví dụ: It is about 300 metres from my house to the bus stop. (Từ nhà tôi đến trạm xe buýt khoảng 300 mét.)"
+        },
+
+        {
+          type:"quiz",
+          title:"3) Should / shouldn’t — Choose the correct option in brackets.",
+          subtitle:"Chọn nên/không nên. Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id:"CL2_SH_1",
+              type:"mcq",
+              points:1,
+              prompt:"That’s an interesting book. You (should / shouldn’t) read it.",
+              vn:"Đó là một cuốn sách thú vị. Bạn (nên / không nên) đọc nó.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"A",
+              explain_en:"It’s a positive recommendation → should.",
+              explain_vn:"Đây là lời khuyên tích cực → dùng should."
+            },
+            {
+              id:"CL2_SH_2",
+              type:"mcq",
+              points:1,
+              prompt:"You nearly fell off your bike! You really (should / shouldn’t) be more careful.",
+              vn:"Bạn suýt ngã khỏi xe đạp! Bạn thật sự (nên / không nên) cẩn thận hơn.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"A",
+              explain_en:"After a danger, we give advice → should be more careful.",
+              explain_vn:"Sau tình huống nguy hiểm, ta khuyên → should be more careful."
+            },
+            {
+              id:"CL2_SH_3",
+              type:"mcq",
+              points:1,
+              prompt:"We (should / shouldn’t) go swimming right after eating.",
+              vn:"Chúng ta (nên / không nên) đi bơi ngay sau khi ăn.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"B",
+              explain_en:"This is unsafe → shouldn’t.",
+              explain_vn:"Việc này không an toàn → shouldn’t."
+            },
+            {
+              id:"CL2_SH_4",
+              type:"mcq",
+              points:1,
+              prompt:"I think that he (should / shouldn’t) eat less. He’s becoming overweight.",
+              vn:"Mình nghĩ cậu ấy (nên / không nên) ăn ít lại. Cậu ấy đang tăng cân.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"A",
+              explain_en:"Advice to improve health → should.",
+              explain_vn:"Lời khuyên để cải thiện sức khỏe → should."
+            },
+            {
+              id:"CL2_SH_5",
+              type:"mcq",
+              points:1,
+              prompt:"There are a lot of cars out today. He (should / shouldn’t) drive so fast.",
+              vn:"Hôm nay có rất nhiều xe. Anh ấy (nên / không nên) lái nhanh như vậy.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"B",
+              explain_en:"Many cars → driving fast is dangerous → shouldn’t.",
+              explain_vn:"Nhiều xe → lái nhanh nguy hiểm → shouldn’t."
+            }
+          ]
+        },
+
+        {
+          type:"quiz",
+          title:"4) Complete each sentence, using should / shouldn’t.",
+          subtitle:"Điền should/shouldn’t. Mỗi câu 1 điểm.",
+          questions: [
+            { id:"CL2_C4_1", type:"fill", points:1, prompt:"We ______ ride our motorbikes very fast in the rain.", vn:"Chúng ta ______ chạy xe máy rất nhanh khi trời mưa.", answers:["shouldn't","shouldn’t"], explain_en:"Rainy roads are slippery → shouldn’t.", explain_vn:"Đường mưa trơn → không nên." },
+            { id:"CL2_C4_2", type:"fill", points:1, prompt:"You ______ study instead of watching YouTube.", vn:"Bạn ______ học thay vì xem YouTube.", answers:["should"], explain_en:"Advice for better habits → should.", explain_vn:"Lời khuyên để tốt hơn → nên." },
+            { id:"CL2_C4_3", type:"fill", points:1, prompt:"My little sister ______ play outside late at night.", vn:"Em gái tôi ______ chơi ngoài trời vào đêm muộn.", answers:["shouldn't","shouldn’t"], explain_en:"Late at night is unsafe → shouldn’t.", explain_vn:"Đêm muộn không an toàn → không nên." },
+            { id:"CL2_C4_4", type:"fill", points:1, prompt:"You ______ help your mum wash the dishes after dinner.", vn:"Bạn ______ giúp mẹ rửa bát sau bữa tối.", answers:["should"], explain_en:"Helpful advice → should.", explain_vn:"Lời khuyên tích cực → nên." },
+            { id:"CL2_C4_5", type:"fill", points:1, prompt:"You look tired. You ______ probably get some sleep.", vn:"Bạn trông mệt. Bạn ______ nên ngủ một chút.", answers:["should"], explain_en:"Advice for rest → should.", explain_vn:"Khuyên nghỉ ngơi → nên." },
+            { id:"CL2_C4_6", type:"fill", points:1, prompt:"The children ______ eat so much ice cream.", vn:"Trẻ con ______ ăn quá nhiều kem.", answers:["shouldn't","shouldn’t"], explain_en:"Too much ice cream is unhealthy → shouldn’t.", explain_vn:"Ăn nhiều kem không tốt → không nên." }
+          ]
+        },
+
+        {
+          type:"writeSentences",
+          title:"5) Look at the pictures. Make sentences, using should / shouldn’t and the cues.",
+          subtitle:"Nhập câu. Chấm tự động theo từ khóa (linh hoạt về chủ ngữ). Mỗi câu 1 điểm.",
+          items: [
+            { id:"CL2_W_1", cue:"waste water", vnCue:"lãng phí nước", must:"shouldn't", keywords:["waste","water"], sample:"He shouldn’t waste water.", sample_vn:"Cậu ấy không nên lãng phí nước." },
+            { id:"CL2_W_2", cue:"wear their helmets", vnCue:"đội mũ bảo hiểm", must:"should", keywords:["wear","helmet"], sample:"They should wear their helmets.", sample_vn:"Họ nên đội mũ bảo hiểm." },
+            { id:"CL2_W_3", cue:"be more careful", vnCue:"cẩn thận hơn", must:"should", keywords:["more","careful"], sample:"He should be more careful.", sample_vn:"Cậu ấy nên cẩn thận hơn." },
+            { id:"CL2_W_4", cue:"play football on the pavement", vnCue:"đá bóng trên vỉa hè", must:"shouldn't", keywords:["play","football","pavement"], sample:"They shouldn’t play football on the pavement.", sample_vn:"Họ không nên đá bóng trên vỉa hè." },
+            { id:"CL2_W_5", cue:"ride their bikes dangerously", vnCue:"đi xe đạp nguy hiểm", must:"shouldn't", keywords:["ride","bike","danger"], sample:"They shouldn’t ride their bikes dangerously.", sample_vn:"Họ không nên đi xe đạp một cách nguy hiểm." }
+          ],
+          explain_en:"A correct answer must include ‘should/shouldn’t’ as required and contain the key words from the cue.",
+          explain_vn:"Đáp án được tính đúng nếu có ‘should/shouldn’t’ theo yêu cầu và có các từ khóa chính của gợi ý."
+        }
+      ]
+    },
+
+    {
+      id: "skills-1",
+      navTitle: "Skills 1",
+      navMeta: "Reading + rules + Q&A + Safe/Unsafe",
+      title: "SKILLS 1 — Reading",
+      desc: "Đọc hiểu về luật an toàn giao thông (pedestrians, cyclists, passengers) + câu hỏi trả lời + phân loại an toàn/không an toàn.",
+      blocks: [
+        {
+          type:"practiceOpen",
+          title:"1) Look at the picture. Can you see anything that is dangerous?",
+          subtitle:"Bài mở (không bắt buộc chấm chặt). Bạn ghi 1–2 ý bằng tiếng Anh hoặc tiếng Việt.",
+          prompt_en:"Write your idea here (example: Someone is crossing carelessly / A cyclist is not careful…).",
+          prompt_vn:"Ghi ý kiến (ví dụ: Ai đó băng qua đường không chú ý / người đi xe đạp không cẩn thận…).",
+          sample_en:"Sample: Someone is crossing the street while the traffic is coming; that can be dangerous.",
+          sample_vn:"Gợi ý: Có người băng qua đường khi xe đang tới; như vậy có thể nguy hiểm."
+        },
+
+        {
+          type:"quiz",
+          title:"2) Read the following text and choose the correct answer.",
+          subtitle:"Chọn đáp án đúng. 1 điểm.",
+          questions: [
+            {
+              id:"SK1_2",
+              type:"mcq",
+              points:1,
+              prompt:"This text is about ______.",
+              vn:"Đoạn văn này nói về ______.",
+              options:[
+                {key:"A", text:"rules for pedestrians", vn:"các quy tắc cho người đi bộ"},
+                {key:"B", text:"traffic lights", vn:"đèn giao thông"},
+                {key:"C", text:"traffic rules", vn:"luật lệ giao thông"}
+              ],
+              answer:"C",
+              explain_en:"The text gives rules for pedestrians, cyclists, and passengers → traffic rules.",
+              explain_vn:"Đoạn văn nêu quy tắc cho người đi bộ, người đi xe đạp và hành khách → luật lệ giao thông."
+            }
+          ]
+        },
+
+        {
+          type:"readingText",
+          title:"Road safety rules (Text)",
+          subtitle:"Văn bản gốc + bản dịch Việt (để học và làm câu hỏi phần 3).",
+          en: [
+            "Here are some rules about road safety. It is important to obey these rules when you are a road user.",
+            "",
+            "Pedestrians",
+            "1. Always look carefully when you cross the street.",
+            "2. Use the pavement or footpath.",
+            "3. Walk across the street at the zebra crossing.",
+            "4. Don’t cross the road on a red light.",
+            "",
+            "Cyclists",
+            "1. Always keep both hands on the handlebars.",
+            "2. Wear helmets, and always use the cycle lane.",
+            "3. Give a signal before you turn.",
+            "4. Don’t carry more than one passenger.",
+            "",
+            "Passengers",
+            "1. Fasten your seatbelt when you are in a car.",
+            "2. Wait for buses to fully stop before getting on or off.",
+            "3. Don’t talk to the driver when he / she is driving.",
+            "4. Don’t stick any body parts out of the window of a moving vehicle."
+          ],
+          vn: [
+            "Dưới đây là một số quy tắc về an toàn giao thông. Điều quan trọng là phải tuân theo các quy tắc này khi bạn là người tham gia giao thông.",
+            "",
+            "Người đi bộ",
+            "1. Luôn nhìn kỹ khi bạn băng qua đường.",
+            "2. Đi trên vỉa hè hoặc lề đường dành cho người đi bộ.",
+            "3. Băng qua đường tại vạch qua đường (zebra crossing).",
+            "4. Không băng qua đường khi đèn đỏ.",
+            "",
+            "Người đi xe đạp",
+            "1. Luôn giữ cả hai tay trên tay lái.",
+            "2. Đội mũ bảo hiểm và luôn đi đúng làn xe đạp.",
+            "3. Ra tín hiệu trước khi rẽ.",
+            "4. Không chở quá một hành khách.",
+            "",
+            "Hành khách",
+            "1. Thắt dây an toàn khi ngồi trên ô tô.",
+            "2. Chờ xe buýt dừng hẳn rồi mới lên hoặc xuống.",
+            "3. Không nói chuyện với tài xế khi họ đang lái xe.",
+            "4. Không thò bất kỳ bộ phận cơ thể nào ra ngoài cửa sổ của xe đang chạy."
+          ]
+        },
+
+        {
+          type:"quiz",
+          title:"3) Read the text again and answer the questions.",
+          subtitle:"Trả lời ngắn (điền đáp án). Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id:"SK1_3_1",
+              type:"fill",
+              points:1,
+              prompt:"Where should pedestrians cross the street?",
+              vn:"Người đi bộ nên băng qua đường ở đâu?",
+              answers:["at the zebra crossing","at a zebra crossing","at the zebra-crossing","at zebra crossing","at the zebra crosswalk"],
+              explain_en:"Pedestrians should walk across the street at the zebra crossing.",
+              explain_vn:"Người đi bộ nên băng qua đường tại vạch qua đường (zebra crossing)."
+            },
+            {
+              id:"SK1_3_2",
+              type:"fill",
+              points:1,
+              prompt:"Which lane should you use when riding a bike?",
+              vn:"Khi đi xe đạp, bạn nên đi làn nào?",
+              answers:["the cycle lane","cycle lane","in the cycle lane"],
+              explain_en:"Cyclists should use the cycle lane.",
+              explain_vn:"Người đi xe đạp nên đi làn xe đạp (cycle lane)."
+            },
+            {
+              id:"SK1_3_3",
+              type:"fill",
+              points:1,
+              prompt:"What should you do before you turn while riding a bike?",
+              vn:"Trước khi rẽ khi đang đi xe đạp, bạn nên làm gì?",
+              answers:["give a signal","give a signal before you turn","signal","give a signal before turning"],
+              explain_en:"Cyclists should give a signal before turning.",
+              explain_vn:"Người đi xe đạp nên ra tín hiệu trước khi rẽ."
+            },
+            {
+              id:"SK1_3_4",
+              type:"fill",
+              points:1,
+              prompt:"What must you do when you get on or off a bus?",
+              vn:"Bạn phải làm gì khi lên hoặc xuống xe buýt?",
+              answers:["wait for buses to fully stop","wait for the bus to fully stop","wait for the bus to stop fully","wait for buses to stop fully","wait for the bus to stop"],
+              explain_en:"Passengers must wait for buses to fully stop before getting on or off.",
+              explain_vn:"Hành khách phải chờ xe buýt dừng hẳn rồi mới lên hoặc xuống."
+            },
+            {
+              id:"SK1_3_5",
+              type:"fill",
+              points:1,
+              prompt:"What mustn’t you do when you are in a moving vehicle?",
+              vn:"Bạn không được làm gì khi đang ở trên xe đang chạy?",
+              answers:["stick any body parts out of the window","stick any body parts out of the window of a moving vehicle","stick body parts out of the window","stick any body parts out of the window of a moving vehicle"],
+              explain_en:"You mustn’t stick any body parts out of the window of a moving vehicle.",
+              explain_vn:"Bạn không được thò bất kỳ bộ phận cơ thể nào ra ngoài cửa sổ của xe đang chạy."
+            }
+          ]
+        },
+
+        {
+          type:"practiceSafe",
+          title:"5) Discuss: Who is being safe, and who isn’t?",
+          subtitle:"Chọn SAFE / NOT SAFE. Mỗi câu 1 điểm.",
+          items: [
+            { id:"SK1_S_1", text:"Hoang is riding a bike, and he is wearing a helmet.", vn:"Hoang đang đi xe đạp và đội mũ bảo hiểm.", answer:"safe", why_en:"Wearing a helmet is safe.", why_vn:"Đội mũ bảo hiểm là an toàn." },
+            { id:"SK1_S_2", text:"It is raining hard, but Mr Long is driving quickly.", vn:"Trời mưa rất to nhưng chú Long lái xe nhanh.", answer:"not", why_en:"Driving fast in heavy rain is dangerous.", why_vn:"Trời mưa mà lái nhanh rất nguy hiểm." },
+            { id:"SK1_S_3", text:"The students are standing in a line to get on the school bus.", vn:"Học sinh đang xếp hàng để lên xe buýt trường học.", answer:"safe", why_en:"Queuing is orderly and safe.", why_vn:"Xếp hàng trật tự là an toàn." },
+            { id:"SK1_S_4", text:"Mr Binh is taking his daughter to school on his motorbike. She is sitting in front of him.", vn:"Chú Bình chở con gái đến trường bằng xe máy. Em ngồi phía trước.", answer:"not", why_en:"A child sitting in front on a motorbike is unsafe.", why_vn:"Trẻ ngồi phía trước trên xe máy thường không an toàn." },
+            { id:"SK1_S_5", text:"Michelle is cycling to school and she is waving and shouting to her friends.", vn:"Michelle đạp xe đến trường và vẫy tay, gọi to với bạn.", answer:"not", why_en:"Waving/shouting while cycling is distracting and unsafe.", why_vn:"Vẫy tay/la hét khi đạp xe gây mất tập trung, không an toàn." }
+          ],
+          explain_en:"Choose SAFE if the behaviour follows traffic rules; otherwise choose NOT SAFE.",
+          explain_vn:"Chọn SAFE nếu hành vi tuân thủ an toàn giao thông; nếu không thì chọn NOT SAFE."
+        }
+      ]
+    },
+
+    {
+      id: "looking-back",
+      navTitle: "Looking Back",
+      navMeta: "Vocabulary + Grammar recap",
+      title: "LOOKING BACK — Vocabulary & Grammar",
+      desc: "Gọi tên biển báo, điền từ (road user/passenger/fly…), viết câu với It chỉ khoảng cách, và chọn đáp án A/B/C.",
+      blocks: [
+        {
+          type:"signsLookingBack",
+          title:"1) Vocabulary — Label each sign.",
+          subtitle:"Nhận diện biển báo (mỗi biển 1 điểm). Lưu ý: trang này có ‘No left turn’.",
+          bank: [
+            { key:"traffic_lights", en:"Traffic lights", vn:"Đèn giao thông" },
+            { key:"school_ahead", en:"School ahead", vn:"Phía trước có trường học" },
+            { key:"hospital_ahead", en:"Hospital ahead", vn:"Phía trước có bệnh viện" },
+            { key:"cycle_lane", en:"Cycle lane", vn:"Làn đường cho xe đạp" },
+            { key:"no_left_turn", en:"No left turn", vn:"Cấm rẽ trái" },
+            { key:"no_cycling", en:"No cycling", vn:"Cấm xe đạp" }
+          ],
+          signs: [
+            { n:1, icon:"traffic_lights", answer:"traffic_lights" },
+            { n:2, icon:"school_ahead", answer:"school_ahead" },
+            { n:3, icon:"hospital_ahead", answer:"hospital_ahead" },
+            { n:4, icon:"cycle_lane", answer:"cycle_lane" },
+            { n:5, icon:"no_left_turn", answer:"no_left_turn" },
+            { n:6, icon:"no_cycling", answer:"no_cycling" }
+          ],
+          explain_en:"Match each sign to its label on the page.",
+          explain_vn:"Ghép đúng tên biển báo như trong trang Looking Back."
+        },
+
+        {
+          type:"quiz",
+          title:"2) Fill in each gap with one word to complete the sentences.",
+          subtitle:"Điền 1 từ. Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id:"LB2_1",
+              type:"fill",
+              points:1,
+              prompt:"A road ______ is anyone who uses a road, such as a pedestrian, cyclist or motorist.",
+              vn:"Một ______ tham gia giao thông đường bộ là bất kỳ ai sử dụng đường, như người đi bộ, người đi xe đạp hoặc người lái xe.",
+              answers:["user"],
+              explain_en:"The correct term is “road user”.",
+              explain_vn:"Cụm đúng là “road user” (người tham gia giao thông)."
+            },
+            {
+              id:"LB2_2",
+              type:"fill",
+              points:1,
+              prompt:"Does your dad ______ his motorbike carefully?",
+              vn:"Bố bạn có ______ xe máy cẩn thận không?",
+              answers:["ride"],
+              explain_en:"We say “ride a motorbike”.",
+              explain_vn:"Động từ đi với motorbike là “ride”."
+            },
+            {
+              id:"LB2_3",
+              type:"fill",
+              points:1,
+              prompt:"A ______ is a person travelling in a car, bus, train, …, but not driving.",
+              vn:"Một ______ là người đang di chuyển trên ô tô, xe buýt, tàu…, nhưng không lái.",
+              answers:["passenger"],
+              explain_en:"A person who is not driving is a “passenger”.",
+              explain_vn:"Người không lái xe gọi là “passenger” (hành khách)."
+            },
+            {
+              id:"LB2_4",
+              type:"fill",
+              points:1,
+              prompt:"My cousin wants to become a pilot. He is learning to ______ planes.",
+              vn:"Anh họ tôi muốn trở thành phi công. Anh ấy đang học ______ máy bay.",
+              answers:["fly"],
+              explain_en:"Pilots “fly” planes.",
+              explain_vn:"Phi công “fly” (lái/điều khiển) máy bay."
+            },
+            {
+              id:"LB2_5",
+              type:"fill",
+              points:1,
+              prompt:"We should be careful when the ______ light turns yellow.",
+              vn:"Chúng ta nên cẩn thận khi đèn ______ chuyển sang màu vàng.",
+              answers:["traffic"],
+              explain_en:"The phrase is “traffic light”.",
+              explain_vn:"Cụm đúng là “traffic light” (đèn giao thông)."
+            }
+          ]
+        },
+
+        {
+          type:"itDistance",
+          title:"3) Grammar — Write complete sentences, using these cues.",
+          subtitle:"Nhập câu hoàn chỉnh. Chấm tự động (linh hoạt). Mỗi câu 1 điểm.",
+          items: [
+            {
+              id:"LB3_1",
+              cue:"over 100 km / my town / Ho Chi Minh City.",
+              vnCue:"hơn 100 km / thị trấn tôi / TP. Hồ Chí Minh.",
+              accept:[
+                "it is over 100 km from my town to ho chi minh city",
+                "it's over 100 km from my town to ho chi minh city",
+                "it is over 100 kilometres from my town to ho chi minh city"
+              ],
+              explain_en:"Use It is + distance + from A to B.",
+              explain_vn:"Dùng It is + khoảng cách + from A to B."
+            },
+            {
+              id:"LB3_2",
+              cue:"about 25 km / here / my grandparents’ house.",
+              vnCue:"khoảng 25 km / từ đây / nhà ông bà tôi.",
+              accept:[
+                "it is about 25 km from here to my grandparents house",
+                "it's about 25 km from here to my grandparents house",
+                "it is about 25 kilometres from here to my grandparents house"
+              ],
+              explain_en:"‘from here to …’ is correct.",
+              explain_vn:"Dùng đúng ‘from here to …’."
+            },
+            {
+              id:"LB3_3",
+              cue:"not very far / our school / the city museum.",
+              vnCue:"không quá xa / trường chúng tôi / bảo tàng thành phố.",
+              accept:[
+                "it is not very far from our school to the city museum",
+                "it's not very far from our school to the city museum"
+              ],
+              explain_en:"Negative distance description: not very far.",
+              explain_vn:"Mô tả phủ định: not very far."
+            },
+            {
+              id:"LB3_4",
+              cue:"how far / your house / the gym?",
+              vnCue:"bao xa / nhà bạn / phòng tập gym?",
+              accept:[
+                "how far is it from your house to the gym",
+                "how far is it from your house to the gym?"
+              ],
+              explain_en:"Question form: How far is it from A to B?",
+              explain_vn:"Câu hỏi: How far is it from A to B?"
+            },
+            {
+              id:"LB3_5",
+              cue:"it / a long distance / Ha Noi / Ban Gioc Waterfall?",
+              vnCue:"có phải / quãng đường dài / Hà Nội / thác Bản Giốc?",
+              accept:[
+                "is it a long distance from ha noi to ban gioc waterfall",
+                "is it a long distance from ha noi to ban gioc waterfall?"
+              ],
+              explain_en:"Yes/No question form with It: Is it …?",
+              explain_vn:"Câu hỏi Yes/No với It: Is it …?"
+            }
+          ]
+        },
+
+        {
+          type:"quiz",
+          title:"4) Choose A, B, or C to complete the sentences.",
+          subtitle:"Chọn A/B/C. Mỗi câu 1 điểm.",
+          questions: [
+            {
+              id:"LB4_1",
+              type:"mcq",
+              points:1,
+              prompt:"You ______ put the rubbish in the waste bins over there.",
+              vn:"Bạn ______ bỏ rác vào thùng rác ở đằng kia.",
+              options:[
+                {key:"A", text:"should", vn:"should (nên)"},
+                {key:"B", text:"would", vn:"would"},
+                {key:"C", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"A",
+              explain_en:"Giving advice → should.",
+              explain_vn:"Đưa lời khuyên → should."
+            },
+            {
+              id:"LB4_2",
+              type:"mcq",
+              points:1,
+              prompt:"You ______ be over eighteen to ride a motorbike.",
+              vn:"Bạn ______ phải trên 18 tuổi để đi xe máy.",
+              options:[
+                {key:"A", text:"would", vn:"would"},
+                {key:"B", text:"must", vn:"must (phải)"},
+                {key:"C", text:"could", vn:"could"}
+              ],
+              answer:"B",
+              explain_en:"Requirement / rule → must.",
+              explain_vn:"Quy định/bắt buộc → must."
+            },
+            {
+              id:"LB4_3",
+              type:"mcq",
+              points:1,
+              prompt:"Children ______ ride their bikes too fast.",
+              vn:"Trẻ em ______ đi xe đạp quá nhanh.",
+              options:[
+                {key:"A", text:"mightn’t", vn:"mightn’t"},
+                {key:"B", text:"wouldn’t", vn:"wouldn’t"},
+                {key:"C", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"C",
+              explain_en:"Advice (negative) → shouldn’t.",
+              explain_vn:"Lời khuyên (phủ định) → shouldn’t."
+            },
+            {
+              id:"LB4_4",
+              type:"mcq",
+              points:1,
+              prompt:"I am a bit lost. ______ you help me, please?",
+              vn:"Tôi hơi lạc đường. ______ bạn giúp tôi được không?",
+              options:[
+                {key:"A", text:"Could", vn:"Could (có thể…không?)"},
+                {key:"B", text:"Should", vn:"Should"},
+                {key:"C", text:"Might", vn:"Might"}
+              ],
+              answer:"A",
+              explain_en:"Polite request → Could you…?",
+              explain_vn:"Lời nhờ lịch sự → Could you…?"
+            },
+            {
+              id:"LB4_5",
+              type:"mcq",
+              points:1,
+              prompt:"You ______ eat so many cookies. Too much sugar is bad for you.",
+              vn:"Bạn ______ ăn nhiều bánh quy như vậy. Quá nhiều đường không tốt cho bạn.",
+              options:[
+                {key:"A", text:"couldn’t", vn:"couldn’t"},
+                {key:"B", text:"wouldn’t", vn:"wouldn’t"},
+                {key:"C", text:"shouldn’t", vn:"shouldn’t (không nên)"}
+              ],
+              answer:"C",
+              explain_en:"Advice (negative) for health → shouldn’t.",
+              explain_vn:"Khuyên không nên vì sức khỏe → shouldn’t."
+            },
+            {
+              id:"LB4_6",
+              type:"mcq",
+              points:1,
+              prompt:"This is a big park. You ______ run or cycle here.",
+              vn:"Đây là một công viên lớn. Bạn ______ chạy bộ hoặc đạp xe ở đây.",
+              options:[
+                {key:"A", text:"should", vn:"should"},
+                {key:"B", text:"can", vn:"can (có thể)"},
+                {key:"C", text:"could", vn:"could"}
+              ],
+              answer:"B",
+              explain_en:"Permission/ability → can.",
+              explain_vn:"Chỉ khả năng/được phép → can."
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // =========================
+  // Helpers
+  // =========================
+  const LS_KEY = "U7_TRAFFIC_GAME_STATE_V1";
+  const pad2 = n => String(n).padStart(2,"0");
+  const nowMs = () => Date.now();
+
+  function toast(msg, ms=2600){
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(()=>el.classList.remove("show"), ms);
+  }
+
+  function norm(s){
+    if (s == null) return "";
+    return String(s)
+      .toLowerCase()
+      .trim()
+      .replace(/[’]/g,"'")
+      .replace(/[“”]/g,'"')
+      .replace(/[^a-z0-9\s'\-]/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+  function normLoose(s){
+    // For sentence checks: remove apostrophes as well (it's ~ it is)
+    return norm(s).replace(/'/g,"");
+  }
+
+  function includesAll(haystack, words){
+    const h = normLoose(haystack);
+    return words.every(w => h.includes(normLoose(w)));
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){ return null; }
+  }
+  function saveState(state){
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }
+
+  // Build question registry for scoring/progress
+  function buildRegistry(){
+    const registry = [];
+    for(const sec of DATA){
+      for(const block of sec.blocks){
+        if(block.type === "quiz"){
+          for(const q of block.questions){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: q.id,
+              points: q.points || 1,
+              kind: q.type
+            });
+          }
+        } else if(block.type === "match"){
+          for(const a of block.A){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: `MATCH_${sec.id}_${a.key}`,
+              points: 1,
+              kind: "matchRow"
+            });
+          }
+        } else if(block.type === "signs" || block.type === "signsLookingBack"){
+          for(const s of block.signs){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: `SIGN_${sec.id}_${s.n}`,
+              points: 1,
+              kind: "sign"
+            });
+          }
+        } else if(block.type === "matrix"){
+          for(const it of block.items){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: `${block.idPrefix}${it.n}`,
+              points: 1,
+              kind: "fill"
+            });
+          }
+        } else if(block.type === "itDistance"){
+          for(const it of block.items){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: it.id,
+              points: 1,
+              kind: "sentence"
+            });
+          }
+        } else if(block.type === "writeSentences"){
+          for(const it of block.items){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: it.id,
+              points: 1,
+              kind: "keywordSentence"
+            });
+          }
+        } else if(block.type === "practiceSafe"){
+          for(const it of block.items){
+            registry.push({
+              secId: sec.id,
+              blockTitle: block.title,
+              id: it.id,
+              points: 1,
+              kind: "safe"
+            });
+          }
+        }
+      }
+    }
+    return registry;
+  }
+  const REGISTRY = buildRegistry();
+
+  function maxPoints(){ return REGISTRY.reduce((s,r)=>s+(r.points||0),0); }
+
+  // =========================
+  // Music (WebAudio)
+  // =========================
+  let audio = {
+    ctx: null,
+    master: null,
+    running: false,
+    vol: 0.35,
+    tick: null,
+    step: 0
+  };
+
+  function initAudio(){
+    if(audio.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    audio.ctx = new AC();
+    audio.master = audio.ctx.createGain();
+    audio.master.gain.value = audio.vol;
+    audio.master.connect(audio.ctx.destination);
+  }
+
+  // A gentle upbeat arpeggio loop (no external mp3)
+  const SCALE = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // C D E G A C
+  function playNote(freq, dur=0.18){
+    const t0 = audio.ctx.currentTime;
+    const osc = audio.ctx.createOscillator();
+    const gain = audio.ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    // envelope
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.22, t0 + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    // subtle “sparkle” using second osc
+    const osc2 = audio.ctx.createOscillator();
+    const gain2 = audio.ctx.createGain();
+    osc2.type = "triangle";
+    osc2.frequency.value = freq * 2;
+    gain2.gain.setValueAtTime(0.0001, t0);
+    gain2.gain.exponentialRampToValueAtTime(0.08, t0 + 0.02);
+    gain2.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    osc.connect(gain); gain.connect(audio.master);
+    osc2.connect(gain2); gain2.connect(audio.master);
+
+    osc.start(t0); osc.stop(t0 + dur);
+    osc2.start(t0); osc2.stop(t0 + dur);
+  }
+
+  function startMusic(){
+    initAudio();
+    audio.ctx.resume?.();
+    if(audio.running) return;
+    audio.running = true;
+    audio.step = 0;
+    // pattern: arpeggio with occasional “bounce”
+    audio.tick = setInterval(() => {
+      if(!audio.running) return;
+      const base = SCALE[audio.step % SCALE.length];
+      const extra = (audio.step % 8 === 6) ? base*1.5 : null;
+      playNote(base, 0.16);
+      if(extra) setTimeout(()=>{ if(audio.running) playNote(extra, 0.12); }, 90);
+      audio.step++;
+    }, 240);
+  }
+
+  function stopMusic(){
+    audio.running = false;
+    if(audio.tick){ clearInterval(audio.tick); audio.tick = null; }
+  }
+
+  // =========================
+  // State
+  // =========================
+  const DEFAULT_STATE = {
+    activeSecId: DATA[0].id,
+    startMs: nowMs(),
+    elapsedMs: 0,
+    answers: {},   // { qid: value }
+    submitted: false,
+    lastScore: 0,
+    musicOn: false,
+    musicVol: 35,
+    practiceNames: {} // GS5
+  };
+
+  let STATE = loadState() || DEFAULT_STATE;
+
+  // Restore timer baseline
+  let TIMER_START = nowMs();
+  function getElapsed(){
+    const base = STATE.elapsedMs || 0;
+    const running = nowMs() - TIMER_START;
+    return base + running;
+  }
+  function fmtTime(ms){
+    const s = Math.floor(ms/1000);
+    const mm = Math.floor(s/60);
+    const ss = s % 60;
+    return `${pad2(mm)}:${pad2(ss)}`;
+  }
+
+  function setAnswer(id, value){
+    STATE.answers[id] = value;
+    saveState(STATE);
+    updateKPI();
+  }
+  function getAnswer(id){
+    return STATE.answers[id];
+  }
+
+  // =========================
+  // Grading
+  // =========================
+  function gradeOne(reg){
+    const id = reg.id;
+    // Determine by ID prefix/section patterns
+    // 1) Quiz MCQ / fill stored directly with same ID
+    // 2) Match rows: MATCH_{secId}_{key}
+    // 3) Signs: SIGN_{secId}_{n}
+    // 4) Matrix vocab: GS4_{n}
+    // 5) itDistance: same ID
+    // 6) writeSentences: same ID
+    // 7) safe: same ID
+    const val = getAnswer(id);
+
+    // if unanswered
+    if(val == null || val === "") return { answered:false, correct:false, score:0, max: reg.points };
+
+    // Find definition
+    // MCQ / fill / etc:
+    for(const sec of DATA){
+      for(const block of sec.blocks){
+        if(block.type === "quiz"){
+          const q = block.questions.find(x => x.id === id);
+          if(q){
+            if(q.type === "mcq"){
+              const ok = String(val) === String(q.answer);
+              return { answered:true, correct: ok, score: ok ? reg.points : 0, max: reg.points };
+            }
+            if(q.type === "fill"){
+              const v = norm(val);
+              const ok = (q.answers || []).some(a => norm(a) === v);
+              return { answered:true, correct: ok, score: ok ? reg.points : 0, max: reg.points };
+            }
+          }
+        }
+        if(block.type === "match" && id.startsWith("MATCH_")){
+          // id: MATCH_{secId}_{Akey}
+          const parts = id.split("_");
+          const aKey = parts[parts.length-1];
+          const expected = block.answers[aKey];
+          const ok = String(val) === String(expected);
+          return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+        }
+        if((block.type === "signs" || block.type === "signsLookingBack") && id.startsWith("SIGN_")){
+          const parts = id.split("_");
+          const n = Number(parts[parts.length-1]);
+          const sign = block.signs.find(s => s.n === n);
+          const ok = sign && (String(val) === String(sign.answer));
+          return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+        }
+        if(block.type === "matrix"){
+          const item = block.items.find(it => `${block.idPrefix}${it.n}` === id);
+          if(item){
+            const v = norm(val);
+            const ok = (item.answers||[]).some(a => norm(a) === v);
+            return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+          }
+        }
+        if(block.type === "itDistance"){
+          const it = block.items.find(x => x.id === id);
+          if(it){
+            const v = normLoose(val);
+            const ok = (it.accept || []).some(a => normLoose(a) === v);
+            return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+          }
+        }
+        if(block.type === "writeSentences"){
+          const it = block.items.find(x => x.id === id);
+          if(it){
+            const v = String(val || "");
+            const must = it.must; // should / shouldn't
+            const mustOk = norm(v).includes(must.replace("’","'"));
+            const kwOk = includesAll(v, it.keywords || []);
+            const ok = mustOk && kwOk;
+            return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+          }
+        }
+        if(block.type === "practiceSafe"){
+          const it = block.items.find(x => x.id === id);
+          if(it){
+            const ok = String(val) === String(it.answer);
+            return { answered:true, correct: ok, score: ok ? 1 : 0, max: 1 };
+          }
+        }
+      }
+    }
+    // fallback
+    return { answered:true, correct:false, score:0, max: reg.points };
+  }
+
+  function gradeAll(){
+    let total = 0, max = 0, answered = 0;
+    const per = {};
+    for(const reg of REGISTRY){
+      const g = gradeOne(reg);
+      per[reg.id] = g;
+      total += g.score;
+      max += g.max;
+      if(g.answered) answered++;
+    }
+    return { total, max, answered, per };
+  }
+
+  // =========================
+  // UI: SVG icons
+  // =========================
+  function svgIcon(name){
+    // Simple inline SVG (offline)
+    const common = `fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"`;
+    if(name === "bicycle"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="bicycle">
+        <circle cx="18" cy="46" r="10" ${common}></circle>
+        <circle cx="48" cy="46" r="10" ${common}></circle>
+        <path d="M18 46 L28 28 L36 28 L48 46" ${common}></path>
+        <path d="M28 28 L22 28" ${common}></path>
+        <path d="M36 28 L40 18" ${common}></path>
+        <path d="M24 18 h10" ${common}></path>
+      </svg>`;
+    }
+    if(name === "car"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="car">
+        <path d="M10 40 L16 26 H48 L54 40 Z" ${common}></path>
+        <path d="M12 40 H52 V48 H12 Z" ${common}></path>
+        <circle cx="20" cy="48" r="4" ${common}></circle>
+        <circle cx="44" cy="48" r="4" ${common}></circle>
+        <path d="M22 26 L26 18 H38 L42 26" ${common}></path>
+      </svg>`;
+    }
+    if(name === "bus"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="bus">
+        <rect x="12" y="16" width="40" height="34" rx="6" ${common}></rect>
+        <path d="M18 22 H46" ${common}></path>
+        <path d="M18 28 H46" ${common}></path>
+        <circle cx="22" cy="50" r="3.6" ${common}></circle>
+        <circle cx="42" cy="50" r="3.6" ${common}></circle>
+      </svg>`;
+    }
+    if(name === "motorbike"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="motorbike">
+        <circle cx="18" cy="46" r="8.5" ${common}></circle>
+        <circle cx="48" cy="46" r="8.5" ${common}></circle>
+        <path d="M18 46 H30 L36 34 H46" ${common}></path>
+        <path d="M30 46 L36 46" ${common}></path>
+        <path d="M36 34 L30 28 H22" ${common}></path>
+        <path d="M46 34 L52 28" ${common}></path>
+      </svg>`;
+    }
+    if(name === "plane"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="plane">
+        <path d="M8 34 L56 26 L56 30 L8 38 Z" ${common}></path>
+        <path d="M26 30 L26 12 L34 10 L34 28" ${common}></path>
+        <path d="M26 36 L18 50" ${common}></path>
+        <path d="M34 34 L42 48" ${common}></path>
+      </svg>`;
+    }
+    if(name === "train"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="train">
+        <rect x="18" y="10" width="28" height="40" rx="6" ${common}></rect>
+        <path d="M18 26 H46" ${common}></path>
+        <circle cx="26" cy="46" r="3.5" ${common}></circle>
+        <circle cx="38" cy="46" r="3.5" ${common}></circle>
+        <path d="M22 50 L18 56" ${common}></path>
+        <path d="M42 50 L46 56" ${common}></path>
+      </svg>`;
+    }
+    if(name === "boat"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="boat">
+        <path d="M14 34 L30 18 L46 34" ${common}></path>
+        <path d="M18 34 H46" ${common}></path>
+        <path d="M12 38 H52 L46 48 H18 Z" ${common}></path>
+        <path d="M22 48 H42" ${common}></path>
+      </svg>`;
+    }
+    if(name === "ship"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="ship">
+        <path d="M18 18 H40 V30 H18 Z" ${common}></path>
+        <path d="M40 24 H48 V30 H40 Z" ${common}></path>
+        <path d="M10 34 H54 L48 50 H16 Z" ${common}></path>
+        <path d="M16 50 H48" ${common}></path>
+      </svg>`;
+    }
+
+    // Signs
+    if(name === "traffic_lights"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="traffic lights">
+        <rect x="24" y="10" width="16" height="38" rx="6" ${common}></rect>
+        <circle cx="32" cy="20" r="4" ${common}></circle>
+        <circle cx="32" cy="29" r="4" ${common}></circle>
+        <circle cx="32" cy="38" r="4" ${common}></circle>
+        <path d="M32 48 V56" ${common}></path>
+      </svg>`;
+    }
+    if(name === "hospital_ahead"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="hospital ahead">
+        <rect x="14" y="14" width="36" height="36" rx="8" ${common}></rect>
+        <path d="M32 22 V42" ${common}></path>
+        <path d="M22 32 H42" ${common}></path>
+      </svg>`;
+    }
+    if(name === "no_right_turn"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="no right turn">
+        <circle cx="32" cy="32" r="22" ${common}></circle>
+        <path d="M26 40 V26 H40" ${common}></path>
+        <path d="M40 26 L34 20" ${common}></path>
+        <path d="M40 26 L34 32" ${common}></path>
+        <path d="M18 46 L46 18" ${common}></path>
+      </svg>`;
+    }
+    if(name === "no_left_turn"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="no left turn">
+        <circle cx="32" cy="32" r="22" ${common}></circle>
+        <path d="M38 40 V26 H24" ${common}></path>
+        <path d="M24 26 L30 20" ${common}></path>
+        <path d="M24 26 L30 32" ${common}></path>
+        <path d="M18 46 L46 18" ${common}></path>
+      </svg>`;
+    }
+    if(name === "cycle_lane"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="cycle lane">
+        <rect x="12" y="12" width="40" height="40" rx="10" ${common}></rect>
+        <circle cx="26" cy="40" r="6" ${common}></circle>
+        <circle cx="40" cy="40" r="6" ${common}></circle>
+        <path d="M26 40 L32 26 H38 L40 40" ${common}></path>
+      </svg>`;
+    }
+    if(name === "school_ahead"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="school ahead">
+        <path d="M32 10 L56 54 H8 Z" ${common}></path>
+        <path d="M22 40 C24 34, 28 30, 32 30 C36 30, 40 34, 42 40" ${common}></path>
+        <path d="M28 40 V46" ${common}></path>
+        <path d="M36 40 V46" ${common}></path>
+      </svg>`;
+    }
+    if(name === "no_cycling"){
+      return `
+      <svg viewBox="0 0 64 64" aria-label="no cycling">
+        <circle cx="32" cy="32" r="22" ${common}></circle>
+        <circle cx="24" cy="40" r="6" ${common}></circle>
+        <circle cx="42" cy="40" r="6" ${common}></circle>
+        <path d="M24 40 L30 26 H36 L42 40" ${common}></path>
+        <path d="M18 46 L46 18" ${common}></path>
+      </svg>`;
+    }
+
+    return `<svg viewBox="0 0 64 64"><rect x="10" y="10" width="44" height="44" rx="12" ${common}></rect></svg>`;
+  }
+
+  // =========================
+  // Render
+  // =========================
+  const navEl = document.getElementById("nav");
+  const contentEl = document.getElementById("content");
+  const mainTitleEl = document.getElementById("mainTitle");
+  const mainDescEl = document.getElementById("mainDesc");
+
+  function renderNav(){
+    navEl.innerHTML = "";
+    for(const sec of DATA){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("data-sec", sec.id);
+      btn.setAttribute("aria-current", sec.id === STATE.activeSecId ? "true" : "false");
+      btn.innerHTML = `
+        <div class="left">
+          <div class="t">${sec.navTitle}</div>
+          <div class="m">${sec.navMeta}</div>
+        </div>
+        <div class="pill" id="pill_${sec.id}">—</div>
+      `;
+      btn.addEventListener("click", () => {
+        STATE.activeSecId = sec.id;
+        saveState(STATE);
+        render();
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+      navEl.appendChild(btn);
+    }
+  }
+
+  function render(){
+    renderNav();
+    const sec = DATA.find(s => s.id === STATE.activeSecId) || DATA[0];
+    mainTitleEl.textContent = sec.title;
+    mainDescEl.textContent = sec.desc;
+
+    contentEl.innerHTML = "";
+    for(const block of sec.blocks){
+      contentEl.appendChild(renderBlock(sec, block));
+    }
+    updateKPI();
+    updateNavPills();
+  }
+
+  function renderBlock(sec, block){
+    const card = document.createElement("section");
+    card.className = "card";
+
+    const head = document.createElement("div");
+    head.className = "card-h";
+    head.innerHTML = `
+      <div>
+        <h3 class="h">${block.title}</h3>
+        <p class="s">${block.subtitle || ""}</p>
+      </div>
+      <div class="toolRow">
+        ${block.type !== "conversation" && block.type !== "readingText" ? `<button class="btn secondary mini" data-check="${sec.id}::${block.title}">Chấm phần này</button>` : ``}
+      </div>
+    `;
+    card.appendChild(head);
+
+    const body = document.createElement("div");
+    body.className = "card-c";
+
+    // block renderer
+    if(block.type === "conversation"){
+      body.appendChild(renderConversation(block));
+    } else if(block.type === "quiz"){
+      body.appendChild(renderQuiz(block));
+    } else if(block.type === "matrix"){
+      body.appendChild(renderMatrix(block));
+    } else if(block.type === "practice"){
+      body.appendChild(renderPractice(block));
+    } else if(block.type === "match"){
+      body.appendChild(renderMatch(sec, block));
+    } else if(block.type === "signs"){
+      body.appendChild(renderSigns(sec, block));
+    } else if(block.type === "itDistance"){
+      body.appendChild(renderItDistance(block));
+    } else if(block.type === "writeSentences"){
+      body.appendChild(renderWriteSentences(block));
+    } else if(block.type === "practiceOpen"){
+      body.appendChild(renderPracticeOpen(block));
+    } else if(block.type === "readingText"){
+      body.appendChild(renderReadingText(block));
+    } else if(block.type === "practiceSafe"){
+      body.appendChild(renderPracticeSafe(block));
+    } else if(block.type === "signsLookingBack"){
+      body.appendChild(renderSigns(sec, block, true));
+    } else {
+      body.innerHTML = `<p class="sub">Chưa hỗ trợ loại nội dung này.</p>`;
+    }
+
+    // Explanation/translation area (collapsible), when available
+    const expl = document.createElement("details");
+    expl.innerHTML = `
+      <summary>
+        <span>Ghi chú / Quy tắc / Dịch nhanh</span>
+        <span class="tag">mở/đóng</span>
+      </summary>
+      <div class="dcontent">
+        ${block.explain_en ? `<b>EN:</b> ${escapeHtml(block.explain_en)}<br/>` : ``}
+        ${block.explain_vn ? `<b>VI:</b> ${escapeHtml(block.explain_vn)}<br/>` : ``}
+        ${block.tip_en ? `<div style="margin-top:8px"><b>Example (EN):</b> ${escapeHtml(block.tip_en)}</div>` : ``}
+        ${block.tip_vn ? `<div style="margin-top:6px"><b>Ví dụ (VI):</b> ${escapeHtml(block.tip_vn)}</div>` : ``}
+      </div>
+    `;
+    // Only add if there is something to show
+    const hasExpl = !!(block.explain_en || block.explain_vn || block.tip_en || block.tip_vn);
+    if(hasExpl) body.appendChild(expl);
+
+    card.appendChild(body);
+
+    // footer actions
+    const foot = document.createElement("div");
+    foot.className = "footerActions";
+    if(block.type !== "conversation" && block.type !== "readingText"){
+      foot.innerHTML = `
+        <button class="btn secondary" data-show="${sec.id}::${block.title}">Xem đáp án + giải thích</button>
+      `;
+      card.appendChild(foot);
+    } else {
+      // no footer needed
+    }
+
+    // attach listeners for check/show
+    card.querySelectorAll("[data-check]").forEach(b => b.addEventListener("click", () => checkBlock(sec, block, card)));
+    card.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => showAnswersForBlock(sec, block, card)));
+
+    return card;
+  }
+
+  function renderConversation(block){
+    const wrap = document.createElement("div");
+    wrap.className = "split";
+
+    const p1 = document.createElement("div");
+    p1.className = "panel";
+    p1.innerHTML = `
+      <h4>Nội dung (English)</h4>
+      <p>Đọc theo lượt lời. Có thể bật/tắt hiển thị bản dịch ở từng dòng.</p>
+    `;
+
+    const p2 = document.createElement("div");
+    p2.className = "panel";
+    p2.innerHTML = `
+      <h4>Mẹo học nhanh</h4>
+      <p>
+        <b>How far is it…?</b> = “Bao xa?”<br/>
+        <b>How long does it take…?</b> = “Mất bao lâu?”<br/>
+        <b>You should…</b> = “Bạn nên…” (lời khuyên)
+      </p>
+    `;
+
+    wrap.appendChild(p1);
+    wrap.appendChild(p2);
+
+    const conv = document.createElement("div");
+    conv.className = "conv";
+    for(const line of block.lines){
+      const el = document.createElement("div");
+      el.className = "line";
+      el.innerHTML = `
+        <div class="en">${escapeHtml(line.en)}</div>
+        <div class="vn">${escapeHtml(line.vn)}</div>
+      `;
+      conv.appendChild(el);
+    }
+    const container = document.createElement("div");
+    container.appendChild(wrap);
+    container.appendChild(conv);
+    return container;
+  }
+
+  function renderQuiz(block){
+    const out = document.createElement("div");
+    out.className = "grid";
+
+    block.questions.forEach((q, idx) => {
+      const qEl = document.createElement("div");
+      qEl.className = "q";
+      qEl.innerHTML = `
+        <p class="qt">${idx+1}. ${escapeHtml(q.prompt)}</p>
+        <p class="qv">${escapeHtml(q.vn || "")}</p>
+      `;
+
+      const ans = getAnswer(q.id);
+
+      if(q.type === "mcq"){
+        const opts = document.createElement("div");
+        opts.className = "opts";
+        q.options.forEach(opt => {
+          const id = `${q.id}_${opt.key}`;
+          const lab = document.createElement("label");
+          lab.className = "opt";
+          lab.innerHTML = `
+            <input type="radio" name="${q.id}" value="${opt.key}" ${ans===opt.key?"checked":""} aria-label="${opt.key}"/>
+            <div>
+              <div><b>${opt.key}.</b> ${escapeHtml(opt.text)}</div>
+              <div class="hint">${escapeHtml(opt.vn || "")}</div>
+            </div>
+          `;
+          lab.querySelector("input").addEventListener("change", (e) => setAnswer(q.id, e.target.value));
+          opts.appendChild(lab);
+        });
+        qEl.appendChild(opts);
+      } else if(q.type === "fill"){
+        const fill = document.createElement("div");
+        fill.className = "fill";
+        fill.innerHTML = `
+          <input type="text" placeholder="Nhập đáp án..." value="${escapeAttr(ans||"")}" aria-label="Điền đáp án"/>
+          <span class="hint">Gợi ý: điền đúng chính tả tiếng Anh (không viết thừa dấu chấm).</span>
+        `;
+        const input = fill.querySelector("input");
+        input.addEventListener("input", () => setAnswer(q.id, input.value));
+        qEl.appendChild(fill);
+      }
+
+      qEl.appendChild(makeExplainDetails(q));
+      out.appendChild(qEl);
+    });
+
+    return out;
+  }
+
+  function renderMatrix(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const grid = document.createElement("div");
+    grid.className = "icons";
+
+    block.items.forEach(it => {
+      const qid = `${block.idPrefix}${it.n}`;
+      const val = getAnswer(qid) || "";
+      const cell = document.createElement("div");
+      cell.className = "pic";
+      cell.innerHTML = `
+        <div class="lab">${it.n}.</div>
+        ${svgIcon(it.icon)}
+        <div class="fill">
+          <input type="text" value="${escapeAttr(val)}" placeholder="write a word..." aria-label="vocabulary"/>
+        </div>
+      `;
+      cell.querySelector("input").addEventListener("input", (e)=> setAnswer(qid, e.target.value));
+      const d = document.createElement("details");
+      d.innerHTML = `
+        <summary><span>Đáp án + dịch</span><span class="tag">mở/đóng</span></summary>
+        <div class="dcontent"><b>Answer:</b> ${escapeHtml(it.answers[0])}<br/><b>VI:</b> ${escapeHtml(it.explain_vn)}</div>
+      `;
+      cell.appendChild(d);
+      grid.appendChild(cell);
+    });
+
+    wrap.appendChild(grid);
+
+    const note = document.createElement("div");
+    note.className = "hint";
+    note.textContent = "Chấp nhận một số biến thể: bike/bicycle, airplane/plane, motorbike/motorcycle.";
+    wrap.appendChild(note);
+
+    return wrap;
+  }
+
+  function renderPractice(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const table = document.createElement("div");
+    table.className = "grid";
+
+    const saved = STATE.practiceNames || {};
+    const keyBase = `${STATE.activeSecId}::GS5`;
+
+    block.list.forEach((en, i) => {
+      const vn = block.vnList[i];
+      const k = `GS5_${i+1}`;
+      const val = saved[k] || "";
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <div class="a">${i+1}. ${escapeHtml(en)}<div class="hint">${escapeHtml(vn)}</div></div>
+        <div class="b">
+          <input type="text" value="${escapeAttr(val)}" placeholder="Write a friend's name..." style="width: min(360px,100%);padding:10px 12px;border-radius:14px;border:1px solid var(--line)" />
+          <span class="tag">không chấm</span>
+        </div>
+      `;
+      row.querySelector("input").addEventListener("input", (e) => {
+        STATE.practiceNames = STATE.practiceNames || {};
+        STATE.practiceNames[k] = e.target.value;
+        saveState(STATE);
+      });
+      table.appendChild(row);
+    });
+
+    const ex = document.createElement("div");
+    ex.className = "panel";
+    ex.innerHTML = `
+      <h4>Example</h4>
+      <p><b>${escapeHtml(block.example.enA)}</b><br/>${escapeHtml(block.example.enB)}</p>
+      <p style="margin-top:8px"><b>${escapeHtml(block.example.vnA)}</b><br/>${escapeHtml(block.example.vnB)}</p>
+    `;
+
+    wrap.appendChild(table);
+    wrap.appendChild(ex);
+    return wrap;
+  }
+
+  function renderMatch(sec, block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const bank = document.createElement("div");
+    bank.className = "panel";
+    bank.innerHTML = `
+      <h4>Phrases in B</h4>
+      <p>${block.B.map(b=>`<span class="tag">${b.key}. ${escapeHtml(b.text)}</span>`).join(" ")}</p>
+      <p style="margin-top:8px"><b>VI:</b> ${block.B.map(b=>`${b.key}. ${escapeHtml(b.vn)}`).join(" | ")}</p>
+    `;
+
+    const table = document.createElement("div");
+    table.className = "grid";
+
+    block.A.forEach((a, idx) => {
+      const qid = `MATCH_${sec.id}_${a.key}`;
+      const val = getAnswer(qid) || "";
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <div class="a">${a.key}. ${escapeHtml(a.text)} <div class="hint">${escapeHtml(a.vn)}</div></div>
+        <div class="b">
+          <select aria-label="match">
+            <option value="">— choose —</option>
+            ${block.B.map(b=>`<option value="${b.key}" ${val===b.key?"selected":""}>${b.key}. ${escapeHtml(b.text)}</option>`).join("")}
+          </select>
+          <span class="tag">1 điểm</span>
+        </div>
+      `;
+      row.querySelector("select").addEventListener("change", (e)=> setAnswer(qid, e.target.value));
+      table.appendChild(row);
+    });
+
+    wrap.appendChild(table);
+    wrap.appendChild(bank);
+
+    const d = document.createElement("details");
+    d.innerHTML = `
+      <summary><span>Đáp án mẫu (SGK)</span><span class="tag">mở/đóng</span></summary>
+      <div class="dcontent">
+        1 → c (ride a bike) · 2 → a (drive a car) · 3 → b (sail a boat) · 4 → e (go on foot) · 5 → d (travel by air)
+      </div>
+    `;
+    wrap.appendChild(d);
+
+    return wrap;
+  }
+
+  function renderSigns(sec, block, isLookingBack=false){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const bank = document.createElement("div");
+    bank.className = "panel";
+    bank.innerHTML = `
+      <h4>Phrase bank</h4>
+      <p>${block.bank.map(b=>`<span class="tag">${escapeHtml(b.en)}</span>`).join(" ")}</p>
+      <p style="margin-top:8px"><b>VI:</b> ${block.bank.map(b=>escapeHtml(b.vn)).join(" | ")}</p>
+    `;
+
+    const grid = document.createElement("div");
+    grid.className = "signs";
+
+    block.signs.forEach(s => {
+      const qid = `SIGN_${sec.id}_${s.n}`;
+      const val = getAnswer(qid) || "";
+      const cell = document.createElement("div");
+      cell.className = "pic";
+      cell.innerHTML = `
+        <div class="lab">${s.n}.</div>
+        ${svgIcon(s.icon)}
+        <div class="fill">
+          <select aria-label="sign label">
+            <option value="">— choose —</option>
+            ${block.bank.map(b=>`<option value="${b.key}" ${val===b.key?"selected":""}>${escapeHtml(b.en)}</option>`).join("")}
+          </select>
+        </div>
+      `;
+      cell.querySelector("select").addEventListener("change", (e)=> setAnswer(qid, e.target.value));
+      const ansObj = block.bank.find(x=>x.key===s.answer);
+      const d = document.createElement("details");
+      d.innerHTML = `
+        <summary><span>Đáp án + dịch</span><span class="tag">mở/đóng</span></summary>
+        <div class="dcontent"><b>Answer:</b> ${escapeHtml(ansObj.en)}<br/><b>VI:</b> ${escapeHtml(ansObj.vn)}</div>
+      `;
+      cell.appendChild(d);
+      grid.appendChild(cell);
+    });
+
+    wrap.appendChild(grid);
+    wrap.appendChild(bank);
+
+    return wrap;
+  }
+
+  function renderItDistance(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const note = document.createElement("div");
+    note.className = "panel";
+    note.innerHTML = `
+      <h4>Cấu trúc</h4>
+      <p>
+        <b>It is (about) + distance + from A to B.</b><br/>
+        <b>How far is it from A to B?</b><br/>
+        Bạn có thể dùng: <span class="mono">It is</span> hoặc <span class="mono">It’s</span>, <span class="mono">kilometres</span> hoặc <span class="mono">km</span>.
+      </p>
+    `;
+    wrap.appendChild(note);
+
+    block.items.forEach((it, idx) => {
+      const q = document.createElement("div");
+      q.className = "q";
+      const val = getAnswer(it.id) || "";
+      q.innerHTML = `
+        <p class="qt">${idx+1}. ${escapeHtml(it.cue)}</p>
+        <p class="qv">${escapeHtml(it.vnCue || "")}</p>
+        <div class="fill">
+          <input type="text" value="${escapeAttr(val)}" placeholder="Type the full sentence..." aria-label="It distance sentence"/>
+        </div>
+        <details>
+          <summary><span>Đáp án gợi ý + dịch</span><span class="tag">mở/đóng</span></summary>
+          <div class="dcontent">
+            <b>One correct answer:</b> ${escapeHtml(prettyOne(it.accept))}<br/>
+            <b>VI:</b> ${escapeHtml(toVietnameseDistance(prettyOne(it.accept)))}
+          </div>
+        </details>
+      `;
+      q.querySelector("input").addEventListener("input", (e)=> setAnswer(it.id, e.target.value));
+      wrap.appendChild(q);
+    });
+
+    return wrap;
+  }
+
+  function renderWriteSentences(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    block.items.forEach((it, idx) => {
+      const q = document.createElement("div");
+      q.className = "q";
+      const val = getAnswer(it.id) || "";
+      q.innerHTML = `
+        <p class="qt">${idx+1}. ${escapeHtml(it.cue)}</p>
+        <p class="qv">${escapeHtml(it.vnCue)}</p>
+        <div class="fill">
+          <textarea placeholder="Write a sentence using should/shouldn’t..." aria-label="write sentence">${escapeHtml(val)}</textarea>
+        </div>
+        <details>
+          <summary><span>Đáp án mẫu + dịch</span><span class="tag">mở/đóng</span></summary>
+          <div class="dcontent">
+            <b>Sample:</b> ${escapeHtml(it.sample)}<br/>
+            <b>VI:</b> ${escapeHtml(it.sample_vn)}<br/>
+            <div style="margin-top:6px"><b>Tiêu chí chấm tự động:</b> phải có <span class="mono">${it.must}</span> và các từ khóa chính của gợi ý.</div>
+          </div>
+        </details>
+      `;
+      q.querySelector("textarea").addEventListener("input", (e)=> setAnswer(it.id, e.target.value));
+      wrap.appendChild(q);
+    });
+
+    return wrap;
+  }
+
+  function renderPracticeOpen(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    const qid = "SK1_OPEN_1";
+    const val = getAnswer(qid) || "";
+
+    const box = document.createElement("div");
+    box.className = "q";
+    box.innerHTML = `
+      <p class="qt">${escapeHtml(block.prompt_en)}</p>
+      <p class="qv">${escapeHtml(block.prompt_vn)}</p>
+      <div class="fill">
+        <textarea placeholder="Your answer..." aria-label="open practice">${escapeHtml(val)}</textarea>
+      </div>
+      <details>
+        <summary><span>Gợi ý trả lời</span><span class="tag">mở/đóng</span></summary>
+        <div class="dcontent">
+          <b>EN:</b> ${escapeHtml(block.sample_en)}<br/>
+          <b>VI:</b> ${escapeHtml(block.sample_vn)}
+        </div>
+      </details>
+      <div class="hint">Bài này không tính điểm bắt buộc, nhưng vẫn được tính “đã trả lời” nếu bạn nhập nội dung.</div>
+    `;
+    box.querySelector("textarea").addEventListener("input", (e)=> setAnswer(qid, e.target.value));
+    wrap.appendChild(box);
+    return wrap;
+  }
+
+  function renderReadingText(block){
+    const wrap = document.createElement("div");
+    wrap.className = "split";
+
+    const left = document.createElement("div");
+    left.className = "panel";
+    left.innerHTML = `<h4>English</h4><p class="mono" style="white-space:pre-wrap">${escapeHtml(block.en.join("\n"))}</p>`;
+
+    const right = document.createElement("div");
+    right.className = "panel";
+    right.innerHTML = `<h4>Tiếng Việt</h4><p style="white-space:pre-wrap">${escapeHtml(block.vn.join("\n"))}</p>`;
+
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+    return wrap;
+  }
+
+  function renderPracticeSafe(block){
+    const wrap = document.createElement("div");
+    wrap.className = "grid";
+
+    block.items.forEach((it, idx) => {
+      const q = document.createElement("div");
+      q.className = "q";
+      const val = getAnswer(it.id) || "";
+      q.innerHTML = `
+        <p class="qt">${idx+1}. ${escapeHtml(it.text)}</p>
+        <p class="qv">${escapeHtml(it.vn)}</p>
+        <div class="opts">
+          <label class="opt">
+            <input type="radio" name="${it.id}" value="safe" ${val==="safe"?"checked":""}/>
+            <div><b>SAFE</b> <div class="hint">An toàn</div></div>
+          </label>
+          <label class="opt">
+            <input type="radio" name="${it.id}" value="not" ${val==="not"?"checked":""}/>
+            <div><b>NOT SAFE</b> <div class="hint">Không an toàn</div></div>
+          </label>
+        </div>
+        <details>
+          <summary><span>Đáp án + giải thích</span><span class="tag">mở/đóng</span></summary>
+          <div class="dcontent"><b>Answer:</b> ${it.answer==="safe"?"SAFE":"NOT SAFE"}<br/>
+          <b>Why (EN):</b> ${escapeHtml(it.why_en)}<br/>
+          <b>Vì sao (VI):</b> ${escapeHtml(it.why_vn)}
+          </div>
+        </details>
+      `;
+      q.querySelectorAll("input[type=radio]").forEach(r => r.addEventListener("change",(e)=> setAnswer(it.id, e.target.value)));
+      wrap.appendChild(q);
+    });
+
+    return wrap;
+  }
+
+  function makeExplainDetails(q){
+    const d = document.createElement("details");
+    d.innerHTML = `
+      <summary><span>Đáp án + giải thích + dịch</span><span class="tag">mở/đóng</span></summary>
+      <div class="dcontent">
+        <b>Đáp án đúng:</b> ${escapeHtml(answerText(q))}<br/>
+        ${q.explain_en ? `<div style="margin-top:6px"><b>Explain (EN):</b> ${escapeHtml(q.explain_en)}</div>` : ``}
+        ${q.explain_vn ? `<div style="margin-top:6px"><b>Giải thích (VI):</b> ${escapeHtml(q.explain_vn)}</div>` : ``}
+      </div>
+    `;
+    return d;
+  }
+
+  function answerText(q){
+    if(q.type === "mcq"){
+      const opt = q.options.find(o => o.key === q.answer);
+      return `${q.answer}. ${opt ? opt.text : ""}`;
+    }
+    if(q.type === "fill"){
+      return (q.answers && q.answers[0]) ? q.answers[0] : "";
+    }
+    return "";
+  }
+
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;");
+  }
+  function escapeAttr(s){
+    return escapeHtml(s).replace(/"/g,"&quot;");
+  }
+
+  function prettyOne(arr){
+    // pick first, but normalize capitalization a bit
+    const a = (arr && arr[0]) ? arr[0] : "";
+    // keep original; convert to sentence case
+    return a.replace(/\s+/g," ").trim().replace(/^it\b/i,"It").replace(/^how\b/i,"How").replace(/^is\b/i,"Is");
+  }
+
+  function toVietnameseDistance(sentence){
+    // Simple helper for showing VN translation; not used for grading.
+    const s = sentence.trim();
+    const n = normLoose(s);
+    if(n.startsWith("how far is it")){
+      return "Từ ... đến ... bao xa?";
+    }
+    if(n.startsWith("is it a long distance")){
+      return "Có phải quãng đường từ ... đến ... là dài không?";
+    }
+    if(n.startsWith("it is") || n.startsWith("its")){
+      return "Quãng đường từ ... đến ... là ...";
+    }
+    return "Bản dịch: (tham khảo) Quãng đường/độ xa theo cấu trúc It.";
+  }
+
+  // =========================
+  // Check / Show answers
+  // =========================
+  function checkBlock(sec, block, card){
+    // Evaluate questions within this block; display summary status box
+    const ids = collectBlockIds(sec, block);
+    let subScore = 0, subMax = 0, answered = 0;
+    for(const id of ids){
+      const reg = REGISTRY.find(r => r.id === id);
+      if(!reg) continue;
+      const g = gradeOne(reg);
+      subScore += g.score;
+      subMax += g.max;
+      if(g.answered) answered++;
+    }
+
+    // Special: open practice counts as answered only (no score)
+    if(block.type === "practiceOpen"){
+      const v = getAnswer("SK1_OPEN_1");
+      answered = (v && String(v).trim().length>0) ? 1 : 0;
+      subMax = 0; subScore = 0;
+    }
+
+    const existing = card.querySelector(".status");
+    if(existing) existing.remove();
+
+    const status = document.createElement("div");
+    const ok = subMax ? (subScore/subMax >= 0.6) : (answered>0);
+    status.className = "status " + (ok ? "good" : "bad");
+    status.innerHTML = `
+      <p class="st">${subMax ? `Kết quả phần này: ${subScore}/${subMax} điểm` : `Đã ghi câu trả lời: ${answered ? "Có" : "Chưa"}`}</p>
+      <p class="sd">${subMax ? `Bạn đã trả lời ${answered}/${ids.length} mục được chấm tự động.` : "Bài mở: chỉ cần ghi ý."}</p>
+    `;
+    card.querySelector(".card-c").appendChild(status);
+    toast("Đã chấm phần hiện tại.");
+    updateKPI();
+    updateNavPills();
+  }
+
+  function showAnswersForBlock(sec, block, card){
+    // Expand all details within this block
+    card.querySelectorAll("details").forEach(d => d.open = true);
+    toast("Đã mở đáp án + giải thích trong phần này.");
+  }
+
+  function collectBlockIds(sec, block){
+    const ids = [];
+    if(block.type === "quiz"){
+      block.questions.forEach(q=>ids.push(q.id));
+    } else if(block.type === "match"){
+      block.A.forEach(a=>ids.push(`MATCH_${sec.id}_${a.key}`));
+    } else if(block.type === "signs" || block.type === "signsLookingBack"){
+      block.signs.forEach(s=>ids.push(`SIGN_${sec.id}_${s.n}`));
+    } else if(block.type === "matrix"){
+      block.items.forEach(it=>ids.push(`${block.idPrefix}${it.n}`));
+    } else if(block.type === "itDistance"){
+      block.items.forEach(it=>ids.push(it.id));
+    } else if(block.type === "writeSentences"){
+      block.items.forEach(it=>ids.push(it.id));
+    } else if(block.type === "practiceSafe"){
+      block.items.forEach(it=>ids.push(it.id));
+    }
+    return ids;
+  }
+
+  // =========================
+  // KPI update
+  // =========================
+  function countAnswered(){
+    let answered = 0;
+    for(const reg of REGISTRY){
+      const v = getAnswer(reg.id);
+      if(v != null && String(v).trim() !== "") answered++;
+    }
+    // add open practice as “answered” if filled
+    const open = getAnswer("SK1_OPEN_1");
+    if(open && String(open).trim().length > 0) answered++;
+    return answered;
+  }
+
+  function updateKPI(){
+    const g = gradeAll();
+
+    // include open practice in answered count only
+    const ansCount = countAnswered();
+    const totalCount = REGISTRY.length + 1; // + open practice
+    const max = g.max;
+    const score = g.total;
+
+    document.getElementById("kAnswered").textContent = ansCount;
+    document.getElementById("kTotal").textContent = totalCount;
+    document.getElementById("kScore").textContent = score;
+    document.getElementById("kMax").textContent = max;
+
+    const pct = totalCount ? Math.min(100, Math.round((ansCount/totalCount)*100)) : 0;
+    document.getElementById("bar").style.width = pct + "%";
+  }
+
+  function updateNavPills(){
+    // show per section score / max
+    for(const sec of DATA){
+      let secScore = 0, secMax = 0, secAnswered = 0, secTotal = 0;
+      for(const reg of REGISTRY.filter(r=>r.secId === sec.id)){
+        const gr = gradeOne(reg);
+        secScore += gr.score;
+        secMax += gr.max;
+        secTotal += 1;
+        if(gr.answered) secAnswered += 1;
+      }
+      // open practice belongs to skills-1
+      if(sec.id === "skills-1"){
+        secTotal += 1;
+        const open = getAnswer("SK1_OPEN_1");
+        if(open && String(open).trim().length>0) secAnswered += 1;
+      }
+      const pill = document.getElementById(`pill_${sec.id}`);
+      if(pill){
+        pill.textContent = secMax ? `${secScore}/${secMax}` : `${secAnswered}/${secTotal}`;
+      }
+    }
+  }
+
+  // =========================
+  // Global actions
+  // =========================
+  function submitAll(){
+    const g = gradeAll();
+    STATE.submitted = true;
+    STATE.lastScore = g.total;
+    saveState(STATE);
+    updateKPI();
+    updateNavPills();
+    toast(`Đã nộp bài: ${g.total}/${g.max} điểm.`);
+  }
+
+  function showReview(){
+    const g = gradeAll();
+    const lines = [];
+    lines.push(`Tổng điểm: ${g.total}/${g.max}`);
+    lines.push(`Số mục được chấm tự động đã trả lời: ${g.answered}/${REGISTRY.length}`);
+    lines.push("");
+    lines.push("Gợi ý: bấm vào từng phần → ‘Xem đáp án + giải thích’ để xem chi tiết.");
+    alert(lines.join("\n"));
+  }
+
+  function resetAll(){
+    if(!confirm("Bạn muốn làm lại toàn bộ? (Sẽ xóa mọi câu trả lời và đặt lại thời gian.)")) return;
+    STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    TIMER_START = nowMs();
+    stopMusic();
+    saveState(STATE);
+    render();
+    toast("Đã đặt lại toàn bộ.");
+  }
+
+  // Timer tick
+  setInterval(() => {
+    document.getElementById("kTime").textContent = fmtTime(getElapsed());
+  }, 500);
+
+  // Buttons
+  document.getElementById("btnSubmitAll").addEventListener("click", submitAll);
+  document.getElementById("btnReview").addEventListener("click", showReview);
+  document.getElementById("btnReset").addEventListener("click", resetAll);
+
+  // Music controls
+  const volEl = document.getElementById("vol");
+  volEl.value = STATE.musicVol ?? 35;
+  audio.vol = (Number(volEl.value)||35)/100;
+
+  function updateMusicUI(){
+    const btn = document.getElementById("btnMusic");
+    btn.textContent = `Nhạc: ${STATE.musicOn ? "Bật" : "Tắt"}`;
+  }
+
+  volEl.addEventListener("input", () => {
+    const v = Number(volEl.value)||0;
+    STATE.musicVol = v;
+    audio.vol = v/100;
+    if(audio.master) audio.master.gain.value = audio.vol;
+    saveState(STATE);
+  });
+
+  document.getElementById("btnMusic").addEventListener("click", () => {
+    STATE.musicOn = !STATE.musicOn;
+    saveState(STATE);
+    updateMusicUI();
+    if(STATE.musicOn){
+      startMusic();
+      toast("Nhạc đã bật.");
+    }else{
+      stopMusic();
+      toast("Nhạc đã tắt.");
+    }
+  });
+
+  // Handle autoplay restrictions: start on first user gesture if musicOn
+  window.addEventListener("pointerdown", () => {
+    if(STATE.musicOn && !audio.running){
+      startMusic();
+    }
+  }, { once:false });
+
+  // Initial music state
+  updateMusicUI();
+  if(STATE.musicOn){
+    // try, but may need gesture
+    try{ startMusic(); }catch(e){}
+  }
+
+  // Render
+  render();
+
+  // =========================
+  // Minor: count open practice in progress only
+  // =========================
+  // Note: Open practice is not in REGISTRY to avoid scoring.
+
+})();
+</script>
+</body>
+</html>
